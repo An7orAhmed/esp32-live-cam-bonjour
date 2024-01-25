@@ -47,7 +47,15 @@ class MyApp extends StatelessWidget {
                     color: Colors.deepOrange,
                   ),
                 ),
-              )
+              ),
+              Positioned(
+                top: 20,
+                right: 20,
+                child: ElevatedButton(
+                  onPressed: () => ctx.captureFrame(),
+                  child: const Text('Capture'),
+                ),
+              ),
             ],
           ),
         );
@@ -65,7 +73,8 @@ class MyApp extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 10),
                           child: Card(
                             child: ListTile(
-                              title: Text(service['name'] ?? '', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                              title:
+                                  Text(service['name'] ?? '', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
                               subtitle: Text(service['type'] ?? ''),
                               trailing: Text("${service['host'] ?? ''}:${service['port'] ?? ''}",
                                   style: const TextStyle(fontWeight: FontWeight.bold)),

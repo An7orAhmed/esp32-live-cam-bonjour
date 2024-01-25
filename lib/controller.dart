@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:bonsoir/bonsoir.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
 
 class Controller extends GetxController {
   Socket? socket;
@@ -48,6 +49,13 @@ class Controller extends GetxController {
     socket?.destroy();
     isConnected.value = false;
     Get.snackbar('info', 'ESP32 Cam disconnected.');
+  }
+
+  void captureFrame() async {
+    final dir = await getDownloadsDirectory();
+    final filename = '${dir!.path}/${DateTime.now().millisecondsSinceEpoch}.jpeg';
+    final file = await File(filename).create(recursive: true);
+    await file.writeAsBytes(imageBytes);
   }
 
   Future<void> connectToESP(String socketIP, int socketPort) async {
