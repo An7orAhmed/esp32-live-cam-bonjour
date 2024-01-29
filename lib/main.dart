@@ -92,22 +92,24 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          leading: Padding(
-            padding: const EdgeInsets.all(5),
-            child: Image.asset('assets/logo.png'),
-          ),
-          title: const Text('Safety Camera LIVE'),
-          actions: [
-            Obx(
-              () => ElevatedButton(
-                onPressed: () => ctx.mDNSScanner(),
-                child: Text(ctx.isConnected.value ? 'Disconnect' : 'Scan'),
+        appBar: MediaQuery.of(context).orientation == Orientation.landscape
+            ? null
+            : AppBar(
+                leading: Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Image.asset('assets/logo.png'),
+                ),
+                title: const Text('Safety Camera LIVE'),
+                actions: [
+                  Obx(
+                    () => ElevatedButton(
+                      onPressed: () => ctx.mDNSScanner(),
+                      child: Text(ctx.isConnected.value ? 'Disconnect' : 'Scan'),
+                    ),
+                  ),
+                  const SizedBox(width: 10)
+                ],
               ),
-            ),
-            const SizedBox(width: 10)
-          ],
-        ),
         body: Obx(() => appBody()),
       ),
     );
