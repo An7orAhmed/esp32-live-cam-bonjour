@@ -50,7 +50,7 @@ class Controller extends GetxController {
     timer?.cancel();
     socket?.destroy();
     isConnected.value = false;
-    Get.snackbar('info', 'ESP32 Cam disconnected.');
+    Get.snackbar('info', 'Keo-Cam disconnected.');
   }
 
   void captureFrame() async {
@@ -69,7 +69,7 @@ class Controller extends GetxController {
     try {
       socket = await Socket.connect(socketIP, socketPort);
       isConnected.value = true;
-      Get.snackbar('info', 'ESP32 Cam connected.');
+      Get.snackbar('info', 'Keo-Cam connected.');
 
       timer = Timer.periodic(const Duration(seconds: 5), (timer) {
         socket?.write("GETDATA");
