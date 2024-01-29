@@ -13,6 +13,7 @@ class Controller extends GetxController {
   List<int> packetBytes = [];
   var fps = 0.obs;
   var lastFrameTime = 0;
+  Timer? timer;
 
   Future<void> mDNSScanner() async {
     if (isConnected.value) {
@@ -46,6 +47,7 @@ class Controller extends GetxController {
   }
 
   void disconnect() {
+    timer?.cancel();
     socket?.destroy();
     isConnected.value = false;
     Get.snackbar('info', 'ESP32 Cam disconnected.');
@@ -68,6 +70,10 @@ class Controller extends GetxController {
       socket = await Socket.connect(socketIP, socketPort);
       isConnected.value = true;
       Get.snackbar('info', 'ESP32 Cam connected.');
+
+      timer = Timer.periodic(const Duration(seconds: 5), (timer) {
+        socket?.writeln("GETDATA");
+      });
 
       socket?.listen(
         (data) {
