@@ -72,7 +72,7 @@ class Controller extends GetxController {
       Get.snackbar('info', 'ESP32 Cam connected.');
 
       timer = Timer.periodic(const Duration(seconds: 5), (timer) {
-        socket?.writeln("GETDATA");
+        socket?.write("GETDATA");
       });
 
       socket?.listen(
