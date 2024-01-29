@@ -48,7 +48,7 @@ class Controller extends GetxController {
   void disconnect() {
     socket?.destroy();
     isConnected.value = false;
-    Get.snackbar('info', 'ESP32 Cam disconnected.');
+    Get.snackbar('info', 'Keo-Cam disconnected.');
   }
 
   void captureFrame() async {
@@ -67,7 +67,7 @@ class Controller extends GetxController {
     try {
       socket = await Socket.connect(socketIP, socketPort);
       isConnected.value = true;
-      Get.snackbar('info', 'ESP32 Cam connected.');
+      Get.snackbar('info', 'Keo-Cam connected.');
 
       socket?.listen(
         (data) {
