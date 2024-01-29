@@ -63,6 +63,7 @@ class Controller extends GetxController {
       Get.snackbar('error', 'IP or port invalid!');
       return;
     }
+
     try {
       socket = await Socket.connect(socketIP, socketPort);
       isConnected.value = true;
