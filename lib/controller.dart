@@ -21,7 +21,7 @@ class Controller extends GetxController {
     }
 
     try {
-      String type = '_camera._tcp';
+      String type = '_keo-cam._tcp';
       BonsoirDiscovery discovery = BonsoirDiscovery(type: type, printLogs: false);
       await discovery.ready;
 
